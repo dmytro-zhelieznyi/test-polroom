@@ -61,6 +61,11 @@ export default function Page() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+                <img
+                    src="https://miro.medium.com/v2/resize:fit:500/1*lSUb1T4YW1td0UskwsGZ1w.gif"
+                    alt="Full Screen GIF"
+                    className="mx-auto mb-6 block"
+                />
                 <h1 className="text-2xl font-bold mb-6 text-center text-blue-600">
                     Learn Polish with Us!
                 </h1>
