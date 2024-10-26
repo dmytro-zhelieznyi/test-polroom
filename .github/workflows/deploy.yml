@@ -13,6 +13,12 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
 
+      - name: Verify Secrets Presence
+        run: |
+          if [ -z "${{ secrets.FTP_SERVER }}" ]; then echo "FTP_SERVER is not set"; else echo "FTP_SERVER is set"; fi
+          if [ -z "${{ secrets.FTP_USERNAME }}" ]; then echo "FTP_USERNAME is not set"; else echo "FTP_USERNAME is set"; fi
+          if [ -z "${{ secrets.FTP_PASSWORD }}" ]; then echo "FTP_PASSWORD is not set"; else echo "FTP_PASSWORD is set"; fi
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -30,5 +36,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
           local-dir: './out/'
           server-dir: './out/'
