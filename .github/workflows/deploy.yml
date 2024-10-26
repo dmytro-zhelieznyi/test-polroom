@@ -1,0 +1,34 @@
+name: Build and Deploy Next.js
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npx install
+
+      - name: Build Next.js app
+        run: npx next build && npx next export
+
+      - name: Upload built files to FTP server
+        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: './out'  # Path to your exported Next.js static files
+          server-dir: '.'  # Root directory on the FTP server
